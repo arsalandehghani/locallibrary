@@ -1,9 +1,7 @@
 from unicodedata import name
 # from django.contrib import admin
-from django.urls import re_path
+from django.urls import include, re_path
 from . import views
-
-app_name= 'catalog'
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
