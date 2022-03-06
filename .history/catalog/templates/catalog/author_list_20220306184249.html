@@ -14,12 +14,7 @@
       {% for author in author_list %}
       <li>
         <a href="{{ author.get_absolute_url }}">{{ author.last_name }} - {{ author.first_name }}</a> 
-        {% if author.date_of_birth%}
-          (date_of_birth: {{author.date_of_birth}})
-        {% endif%}
-        {% if author.date_of_death%}
-          (date_of_death: {{author.date_of_death}})
-        {% endif%}
+        (date_of_birth:{{author.date_of_birth}}) (date_of_death:{{author.date_of_death}})
       </li>
       {% endfor %}
 

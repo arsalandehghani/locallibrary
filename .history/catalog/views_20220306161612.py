@@ -1,15 +1,12 @@
 from django.urls import reverse
 from . import models
-#  from .models import Author
 import datetime
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
 from django.views import generic
-#from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .forms import RenewBookForm
 
@@ -86,20 +83,23 @@ def renew_book_librarian(request, pk):
 
     return render(request, 'catalog/book_renew_librarian.html', {'form': form, 'bookinst':book_inst})
 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import Author
 
-class AuthorCreate(generic.CreateView):
-    model = models.Author
+class AuthorCreate(CreateView):
+    model = Author
     fields = '__all__'
     initial={'date_of_death':'05/01/2018',}
 
-class AuthorUpdate(generic.UpdateView):
-    model = models.Author
+class AuthorUpdate(UpdateView):
+    model = Author
     fields = ['first_name','last_name','date_of_birth','date_of_death']
 
-class AuthorDelete(generic.DeleteView):
-    model = models.Author
+class AuthorDelete(DeleteView):
+    model = Author
     success_url = reverse_lazy('authors')
-
+    
 # def index(request):
 #     """
 #     View function for home page of site.

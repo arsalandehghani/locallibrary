@@ -87,16 +87,16 @@ def renew_book_librarian(request, pk):
     return render(request, 'catalog/book_renew_librarian.html', {'form': form, 'bookinst':book_inst})
 
 
-class AuthorCreate(generic.CreateView):
+class AuthorCreate(CreateView):
     model = models.Author
     fields = '__all__'
     initial={'date_of_death':'05/01/2018',}
 
-class AuthorUpdate(generic.UpdateView):
+class AuthorUpdate(UpdateView):
     model = models.Author
     fields = ['first_name','last_name','date_of_birth','date_of_death']
 
-class AuthorDelete(generic.DeleteView):
+class AuthorDelete(DeleteView):
     model = models.Author
     success_url = reverse_lazy('authors')
 

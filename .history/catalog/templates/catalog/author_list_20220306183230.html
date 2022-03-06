@@ -1,0 +1,38 @@
+{% extends "catalog/base_generic.html" %}
+
+{% block sidebar2 %}
+<ul class="sidebar-nav">
+  <li><a href="{% url 'catalog:index' %}">Home</a></li>
+  <li><a href="{% url 'catalog:authors' %}">All authors</a></li>
+  <li><a href="{% url 'catalog:author_create'%}">Create author</a></li>
+  <li><a href="{% url 'catalog:books' %}">All books</a></li>
+  <li><a href="/admin">Admin Page</a></li>
+  <li><a href="{% url 'catalog:my-borrowed' %}">My Borrowed</a></li>
+  {% if user.is_authenticated %}
+    <li>User: {{ user.get_username }}</li>
+    <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
+  {% else %}
+    <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+  {% endif %} 
+        </ul>
+{% endblock %}
+
+
+{% block content %}
+    <h1>Author List</h1>
+
+    {% if author_list %}
+    <ul>
+
+      {% for author in author_list %}
+      <li>
+        <a href="{{ author.get_absolute_url }}">{{ author.last_name }} - {{ author.first_name }}</a> 
+        ({{author.date_of_birth}}) ({{author.date_of_death}})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no authors.</p>
+    {% endif %}       
+{% endblock %}
